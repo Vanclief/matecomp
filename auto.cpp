@@ -6,51 +6,57 @@
 
 using namespace std;
 
-bool ends_with(string const & value, string const & ending){
+//Comprueba si una string termina con otra
+bool suffix(string const & value, string const & ending){
     if (ending.size() > value.size()) return false;
     return equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
 int main(int argc, char* argv[]){
-
-	string p;
-	set<char> alf;
+	//Declarar alfabeto como set, para no repetir y su iterador
+	set<char> alfabeto;
 	set<char>::iterator it;
-	int m;
-	int a;
-	int k;
+	int m, a, k;
+	string p;
 
+	cout << "Introduce la palabra P: ";
 	cin >> p;
 	
 	m = p.length();
 
 	for(int i = 0; i < m; i++){
-		alf.insert(p[i]);
+		alfabeto.insert(p[i]);
 	}
 
-	int delta[m][alf.size()];
+	int delta[m][alfabeto.size()];
 
 	for(int i = 0; i < m; i++){
-		for(int j = 0; j < alf.size(); j++){
+		for(int j = 0; j < alfabeto.size(); j++){
 			delta[i][j] = 0;
 		}
 	}
 
 	cout << "delta = \n";
+	//Para cada estado posible
 	for(int q = 0; q <= m; q++){
+		//Identificador de la letra del alfabeto
 		a = 0;
-		for (it = alf.begin(); it != alf.end(); it++){
+		//Para cada letra en el alfabeto
+		for (it = alfabeto.begin(); it != alfabeto.end(); it++){
+			//Minimo entre el tamano de la palabra o el estado mas 2
 			k = min(m+1,q+2);
 			do{
 				if(k > 0 && k <= m+1){
+					//Si k es valida restar 1, siempre inicialmente
 					k--;
 				} else{
 					break;
 				}
-				// cout << q << " " << *it << " - " << k << " - " << p[k] << " - " << p[q] << endl;
-				// cout << *it << " - " << p[k-1] << " || " << p[k] << " - " << p[q] << endl;
-			}while(*it != p[k-1]  || !ends_with(p.substr(0,k),(p.substr(0,q)+*it)));
-			delta[q][a] = k; // No quiero que se quiebre cuando k = 3 en b
+			//Mientra la palabraQ formada hasta el estado actual mas la posible entrada no coinida con la palabraK hasta el momento
+			}while(!suffix(p.substr(0,k),(p.substr(0,q)+*it)));
+			//Almacenar la trancision si se recibe a, en el estado q
+			delta[q][a] = k; 
+			//Imprimir trancisiones
 			cout <<  q << " - " << *it << " - " << k << endl;
 			a++;
 		}
