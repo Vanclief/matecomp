@@ -55,7 +55,6 @@ int main(int argc, char* argv[]){
       //Almacenar la trancision si se recibe a, en el estado q
       delta[q][a] = k; 
       //Imprimir trancisiones
-      cout <<  q << " - " << *it << " - " << k << endl;
       a++;
     }
   }
