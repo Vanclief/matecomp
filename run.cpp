@@ -7,10 +7,12 @@
 
 using namespace std;
 
-//Comprueba si una string termina con otra
-bool suffix(string const & value, string const & ending){
-  if (ending.size() > value.size()) return false;
-  return equal(ending.rbegin(), ending.rend(), value.rbegin());
+bool suffix (string const &original, string const &possible_suffix) {
+    if (original.length() >= possible_suffix.length()) {
+        return (0 == original.compare (original.length() - possible_suffix.length(), possible_suffix.length(), possible_suffix));
+    } else {
+        return false;
+    }
 }
 
 int main(int argc, char* argv[]){
@@ -20,6 +22,12 @@ int main(int argc, char* argv[]){
   map<char, int> indexAlfabeto;
   int m, a, k;
   string p;
+
+  string t;
+  cin >> t;
+  int n = t.length();
+  int q = 0;
+  int cont = 0;
 
   cin >> p;
 
@@ -53,7 +61,8 @@ int main(int argc, char* argv[]){
           break;
         }
         //Mientra la palabraQ formada hasta el estado actual mas la posible entrada no coinida con la palabraK hasta el momento
-      }while(!suffix(p.substr(0,k),(p.substr(0,q)+*it)));
+        //cout << p.substr(0,q)+*it << " " << p.substr(0,k) << endl;
+      }while(!suffix(p.substr(0,q)+*it, p.substr(0,k)));
       //Almacenar la trancision si se recibe a, en el estado q
       delta[q][a] = k; 
 
@@ -63,7 +72,7 @@ int main(int argc, char* argv[]){
       }
 
       //Imprimir trancisiones
-      cout <<  q << " - " << *it << " - " << k << endl;
+      //cout <<  q << " - " << *it << " - " << k << endl;
       a++;
     }
   }
@@ -76,24 +85,16 @@ int main(int argc, char* argv[]){
   //Si el estado que regresa funcion de transferencia es igual al estado final,
   //contador++
   //cout < contador
-  string t;
-  cin >> t;
-  int n = t.length();
-  int q = 0;
-  int cont = 0;
+  
 
   for (int i = 0; i < n; ++i)
   {
     q = delta[q][indexAlfabeto[t[i]]];
-    cout << q << endl;
     if (q == m){
       cont++;
     }
   }
-  //Funcion de transferencia(Estado, Input) 
-  //Regesar estado despues de aplicar la transición al estado actual
-  //
-  //
+
   cout << cont << endl;
 
   return 0;
