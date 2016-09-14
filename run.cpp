@@ -35,7 +35,6 @@ int main(int argc, char* argv[]){
     }
   }
 
-  cout << "delta = \n";
   //Para cada estado posible
   for(int q = 0; q <= m; q++){
     //Identificador de la letra del alfabeto
