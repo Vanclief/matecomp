@@ -60,5 +60,17 @@ int main(int argc, char* argv[]){
     }
   }
 
+  //Funcion de aceptacion(Palabra)
+  //Serializa la palabra
+  //For hasta que la palabra termine
+  //Ejecuta funcion de transferencia para elemento de la palabra
+  //Inicia con el estado q0 y el bit de la izq de la palabra
+  //Si el estado que regresa funcion de transferencia es igual al estado final,
+  //contador++
+  //cout < contador
+
+  //Funcion de transferencia(Estado, Input) 
+  //Regesar estado despues de aplicar la transición al estado actual
+  //
   return 0;
 }
