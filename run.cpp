@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <map>
 
 using namespace std;
 
@@ -16,6 +17,7 @@ int main(int argc, char* argv[]){
   //Declarar alfabeto como set, para no repetir y su iterador
   set<char> alfabeto;
   set<char>::iterator it;
+  map<char, int> indexAlfabeto;
   int m, a, k;
   string p;
 
@@ -54,7 +56,14 @@ int main(int argc, char* argv[]){
       }while(!suffix(p.substr(0,k),(p.substr(0,q)+*it)));
       //Almacenar la trancision si se recibe a, en el estado q
       delta[q][a] = k; 
+
+      if (q == 0)
+      {
+        indexAlfabeto.insert( pair<char, int>(*it, a));
+      }
+
       //Imprimir trancisiones
+      cout <<  q << " - " << *it << " - " << k << endl;
       a++;
     }
   }
@@ -67,9 +76,25 @@ int main(int argc, char* argv[]){
   //Si el estado que regresa funcion de transferencia es igual al estado final,
   //contador++
   //cout < contador
+  string t;
+  cin >> t;
+  int n = t.length();
+  int q = 0;
+  int cont = 0;
 
+  for (int i = 0; i < n; ++i)
+  {
+    q = delta[q][indexAlfabeto[t[i]]];
+    cout << q << endl;
+    if (q == m){
+      cont++;
+    }
+  }
   //Funcion de transferencia(Estado, Input) 
   //Regesar estado despues de aplicar la transición al estado actual
   //
+  //
+  cout << cont << endl;
+
   return 0;
 }
