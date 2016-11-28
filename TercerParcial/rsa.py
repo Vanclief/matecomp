@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
 p = int(input('Introduce p: '))
 q = int(input('Introduce q: '))
 e = int(input('Introduce e: '))
