@@ -32,7 +32,7 @@ def inverso_multiplicativo(e, phi):
         y1 = y
 
     if temp_phi == 1:
-        return d
+        return d + phi
 
 def es_primo(numero):
     if numero == 2:
@@ -68,6 +68,7 @@ q = int(input('Introduce q: '))
 n = (p * q)
 phi = (p-1) * (q-1)
 e = genera_e(p, q)
+# e = 7 
 d = inverso_multiplicativo(e, phi)
 
 mensaje_a_cifrar = int(input('Introduce el mensaje a cifrar: '))
